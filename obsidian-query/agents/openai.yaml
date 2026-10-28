@@ -1,0 +1,4 @@
+interface:
+  display_name: "Obsidian Query"
+  short_description: "Read and report Zhang Gege's Obsidian knowledge-base records."
+  default_prompt: "使用 $obsidian-query 只读查询 Obsidian 知识库中的工作记录。"

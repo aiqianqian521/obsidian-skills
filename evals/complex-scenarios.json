@@ -1,0 +1,41 @@
+[
+  {
+    "id": "resume-with-newer-log-conflict",
+    "prompt": "继续 Alpha 项目。",
+    "risk": "STATUS 与更新的 LOG 冲突，恢复过程可能静默采用错误状态或顺手写文件。",
+    "expected": [
+      "route:obsidian-project/resume",
+      "read-order:STATUS>recent-LOG>entry>relevant-Topics",
+      "report-conflict",
+      "read-only"
+    ]
+  },
+  {
+    "id": "mixed-session-lifecycle-idempotency",
+    "prompt": "把当前会话完整整理到知识库：包括项目进展、已解决问题、项目结论、跨项目 Playbook，并合并已有概念。",
+    "risk": "短期项目记忆与长期知识混写、Source 重复、Concept 重复、二次执行产生重复事件。",
+    "expected": [
+      "source-once",
+      "daily-is-timeline",
+      "existing-project-only",
+      "project-topic-not-concept",
+      "playbook-by-distill",
+      "merge-existing-concept",
+      "index-is-derived",
+      "idempotent-rerun"
+    ]
+  },
+  {
+    "id": "chinese-ambiguous-project-missing-plugin",
+    "prompt": "查看星火项目状态并记录新进展。",
+    "risk": "中文目录、相似项目名、缺失插件和过期索引叠加时，预检报告必须同时包含环境缺失项和项目身份歧义，不能只输出其中一类就停止。",
+    "expected": [
+      "pause-on-ambiguous-project",
+      "stop-on-environment-gate",
+      "unified-preflight-report",
+      "report-contains-both-missing-plugin-and-ambiguous-project",
+      "do-not-repair-index-implicitly",
+      "write-only-after-gate-and-exact-identity"
+    ]
+  }
+]

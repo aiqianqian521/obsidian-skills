@@ -1,0 +1,4 @@
+interface:
+  display_name: "Obsidian Distill"
+  short_description: "Distill conversations into reusable Obsidian knowledge notes."
+  default_prompt: "使用 $obsidian-distill 将当前会话蒸馏成跨项目可复用知识。"

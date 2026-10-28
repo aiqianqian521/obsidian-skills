@@ -1,0 +1,4 @@
+interface:
+  display_name: "Obsidian Cli"
+  short_description: "Interact with the local Obsidian vault via CLI (read/search/update notes)."
+  default_prompt: "$obsidian-cli"

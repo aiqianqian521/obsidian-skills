@@ -1,0 +1,4 @@
+interface:
+  display_name: "Obsidian Router"
+  short_description: "Route Zhang Gege's Obsidian knowledge-base requests."
+  default_prompt: "根据触发词选择正确的 Obsidian 知识库流程。"

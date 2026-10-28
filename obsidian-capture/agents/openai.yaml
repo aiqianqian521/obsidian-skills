@@ -1,0 +1,4 @@
+interface:
+  display_name: "Obsidian Capture"
+  short_description: "Save raw conversation context into Zhang Gege's Obsidian vault."
+  default_prompt: "使用 $obsidian-capture 保存当前会话原始上下文到 Obsidian。"

@@ -1,0 +1,199 @@
+[
+  {
+    "id": "legacy-project-query-readonly",
+    "prompt": "查看旧项目 Alpha 的详情。",
+    "route": "obsidian-query",
+    "mode": "read-only",
+    "must_preserve": [
+      "legacy-entry"
+    ],
+    "must_not_create": [
+      "STATUS.md",
+      "LOG.md",
+      "TOPICS"
+    ]
+  },
+  {
+    "id": "initialize-project-memory",
+    "prompt": "为 Alpha 项目初始化项目记忆。",
+    "route": "obsidian-project",
+    "mode": "write",
+    "must_create": [
+      "project-entry-if-absent",
+      "STATUS.md",
+      "LOG.md"
+    ],
+    "must_not_create": [
+      "TOPICS",
+      "CITED.md"
+    ]
+  },
+  {
+    "id": "repeat-project-initialization",
+    "prompt": "为 Alpha 项目初始化项目记忆。",
+    "route": "obsidian-project",
+    "mode": "write-idempotent",
+    "must_not_duplicate": [
+      "project-entry",
+      "STATUS.md",
+      "LOG.md"
+    ]
+  },
+  {
+    "id": "record-project-progress",
+    "prompt": "记录 Alpha 项目进展：测试通过，下一步补文档。",
+    "route": "obsidian-project",
+    "mode": "write",
+    "must_update": [
+      "STATUS.md"
+    ],
+    "max_log_events": 1
+  },
+  {
+    "id": "repeat-progress-idempotency",
+    "prompt": "重复执行同一条 Alpha 项目进展。",
+    "route": "obsidian-project",
+    "mode": "write-idempotent",
+    "event_match": "project identity + event fingerprint",
+    "must_not_duplicate": [
+      "LOG event"
+    ]
+  },
+  {
+    "id": "resume-project-readonly",
+    "prompt": "继续 Alpha 项目。",
+    "route": "obsidian-project",
+    "mode": "read-only",
+    "read_order": [
+      "STATUS.md",
+      "recent LOG.md",
+      "project entry",
+      "relevant Topics"
+    ],
+    "must_not_modify": [
+      "vault"
+    ]
+  },
+  {
+    "id": "topic-created-on-demand",
+    "prompt": "把项目索引不能作为事实来源记到 Alpha 项目 Topic。",
+    "route": "obsidian-project",
+    "mode": "write",
+    "must_create": [
+      "TOPICS/topic.md"
+    ],
+    "must_not_create": [
+      "durable Concept"
+    ]
+  },
+  {
+    "id": "ordinary-organization-not-project",
+    "prompt": "整理这篇文章到知识库。",
+    "route": "obsidian-router",
+    "mode": "write",
+    "must_not_invoke": [
+      "obsidian-project"
+    ],
+    "must_not_create": [
+      "STATUS.md",
+      "LOG.md",
+      "TOPICS"
+    ]
+  },
+  {
+    "id": "project-index-old-new",
+    "prompt": "重建项目索引。",
+    "route": "obsidian-index",
+    "mode": "write",
+    "must_index": [
+      "legacy entry",
+      "entry with companion STATUS"
+    ],
+    "rows_per_project": 1
+  },
+  {
+    "id": "directory-language-mapping",
+    "prompt": "分别验证中文和 English 目录映射。",
+    "route": "obsidian-index",
+    "mode": "fixture-only",
+    "variants": [
+      "chinese",
+      "stable-numbered"
+    ]
+  },
+  {
+    "id": "vault-maintenance-record-required",
+    "prompt": "整理知识库目录并修复关系图谱。",
+    "route": "obsidian-index",
+    "mode": "write",
+    "must_create": [
+      "maintenance record"
+    ],
+    "must_update": [
+      "maintenance index"
+    ],
+    "must_report": [
+      "scope",
+      "changes",
+      "skipped",
+      "backup",
+      "verification"
+    ]
+  },
+  {
+    "id": "daily-date-directory-idempotency",
+    "prompt": "把今天的工作归档到80-每日记录的日期目录，重复执行一次。",
+    "route": "obsidian-daily",
+    "mode": "write-idempotent",
+    "canonical_path": "80-每日记录/YYYY-MM-DD/summary.md",
+    "must_not_duplicate": [
+      "YYYY-MM-DD.md",
+      "second summary.md"
+    ]
+  },
+  {
+    "id": "daily-legacy-collision-guard",
+    "prompt": "同一天同时存在根目录日期文件和日期目录summary时继续归档。",
+    "route": "obsidian-daily",
+    "mode": "write-needs-review",
+    "must_preserve": [
+      "both legacy contents"
+    ],
+    "must_not_create": [
+      "third Daily note"
+    ]
+  },
+  {
+    "id": "distill-route-config",
+    "prompt": "把刚才的思考过程蒸馏保存到知识库（思考类归 02_项目/loop）。",
+    "route": "obsidian-distill",
+    "mode": "write",
+    "must_create": [
+      "02_项目/loop/<distill 思考笔记>",
+      "source_reference 字段"
+    ],
+    "must_not_create": [
+      "91_蒸馏整理/思考/<same note>"
+    ]
+  },
+  {
+    "id": "distill-source-reference-wakeup",
+    "prompt": "唤醒这条蒸馏结论对应的原始会话：根据 source_reference 里的 {anchor} 跳到 90_原始来源/会话记录 的 raw 文件。",
+    "route": "obsidian-query",
+    "mode": "read-only",
+    "must_preserve": [
+      "source_reference anchor -> raw turn"
+    ],
+    "must_not_create": []
+  },
+  {
+    "id": "query-tfidf-source-ref",
+    "prompt": "查知识库里引用锚点 00000017 的蒸馏笔记并给出路径。",
+    "route": "obsidian-query",
+    "mode": "read-only",
+    "must_preserve": [
+      "sourceRef in results"
+    ],
+    "must_not_create": []
+  }
+]

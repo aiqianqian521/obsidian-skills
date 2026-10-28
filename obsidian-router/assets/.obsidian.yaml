@@ -1,0 +1,25 @@
+owner: 张格格
+vault_path: ""
+project_name: ""
+timezone: Asia/Shanghai
+directories:
+  inbox: 00_Inbox
+  daily: 01_Daily
+  projects: 02_Projects
+  areas: 03_Areas
+  resources: 04_Resources
+  concepts: 05_Concepts
+  decisions: 06_Decisions
+  people: 07_People
+  skills: 08_Skills
+  playbooks: 09_Playbooks
+  problems: 10_Problems
+  sources: 90_Sources
+  sessions: 90_Sources/Sessions
+  system: 99_System
+status_values:
+  - inbox
+  - processed
+  - needs-review
+  - active
+  - archived

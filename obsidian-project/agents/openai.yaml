@@ -1,0 +1,4 @@
+interface:
+  display_name: "Obsidian Project Memory"
+  short_description: "Maintain and resume project working memory safely."
+  default_prompt: "Use $obsidian-project to resume this project read-only and show the next action."

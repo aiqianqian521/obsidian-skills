@@ -1,0 +1,4 @@
+interface:
+  display_name: "Obsidian Solve"
+  short_description: "Record solved problems into Zhang Gege's Obsidian vault."
+  default_prompt: "使用 $obsidian-solve 提取当前会话解决的问题并录入 Obsidian。"

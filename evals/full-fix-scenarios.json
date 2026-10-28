@@ -1,0 +1,79 @@
+[
+  {
+    "id": "chinese-normalization-algorithm",
+    "prompt": "验证中文归一化算法：缓存策略设计 vs 缓存方案总结 → 应匹配；日志系统 vs 日志方案 → 太短应 needs-review。",
+    "risk": "归一化规则不可执行时，concept/problem 去重失败，产生重复 note。",
+    "fixes_tested": ["P1-2"],
+    "expected": [
+      "strip-suffix-match",
+      "short-base-needs-review",
+      "no-duplicate-created"
+    ]
+  },
+  {
+    "id": "sharding-and-content-search",
+    "prompt": "60 轮超长会话分 3 片存储，每片含 extraction_candidates；随后按关键词检索，只命中相关分片。",
+    "risk": "超长会话截断丢信息，或分片后无法按主题检索。",
+    "fixes_tested": ["P3-5", "P3-7"],
+    "expected": [
+      "three-shards-created",
+      "shard-naming-numbered-suffix",
+      "cross-links-present",
+      "capture-scope-partial",
+      "extraction-candidates-per-shard",
+      "keyword-search-hits-only-relevant-shard"
+    ]
+  },
+  {
+    "id": "full-pipeline-unified-preflight-to-distill",
+    "prompt": "中文 vault，星火平台/星火平台重构，缺插件 → 统一预检收集两类阻塞 → 修复后写入 source → distill 创建 concept 含 backlink → 二次 distill 触发归一化去重。",
+    "risk": "多个修复点之间出现集成断裂：预检短路丢信息、distill 缺 backlink、归一化未触发去重。",
+    "fixes_tested": ["P0", "P1-2", "P2-3", "P3-7"],
+    "expected": [
+      "unified-preflight-both-categories",
+      "distill-backlink-exists",
+      "distill-frontmatter-complete",
+      "normalization-prevents-duplicate",
+      "content-search-finds-concept"
+    ]
+  },
+  {
+    "id": "multi-path-matching-prevent-duplicate",
+    "prompt": "同一 source note 派生两篇 problem 笔记，标题不同（obsidian-skills-quality-gaps vs obsidian-skills-7-quality-issues）。Path 2 source 交叉命中 + Path 3 关键词重叠 ≥ 80% → high 置信度 → merge 而非 create。",
+    "risk": "单路标题匹配无法捕获同 source 不同标题的重复，导致同一份知识分散到多个文件。",
+    "fixes_tested": ["P0-multi-path"],
+    "expected": [
+      "multi-path-matching-section-exists",
+      "source-cross-reference-hit",
+      "keyword-overlap-above-threshold",
+      "high-confidence-merge",
+      "no-duplicate-file-created"
+    ]
+  },
+  {
+    "id": "directory-routing-prevents-root-dump",
+    "prompt": "一篇步骤化修复流程笔记（≥3 步），同时命中概念（定义了模型）和操作手册（步骤化）。优先级链规则2 → 操作手册/，不默认放根目录。",
+    "risk": "内容跨类型时 AI 无法决策目录，默认放根目录导致知识碎片化。",
+    "fixes_tested": ["P1-directory-routing"],
+    "expected": [
+      "directory-routing-file-exists",
+      "priority-chain-rule-2-applied",
+      "routed-to-playbook-not-concept",
+      "not-dumped-to-root",
+      "distill-references-directory-routing"
+    ]
+  },
+  {
+    "id": "supersede-overturns-old-conclusion",
+    "prompt": "一篇 speculative 的概念笔记被后续多项目验证推翻，新笔记 confidence=confirmed → supersede 动作：旧标记 superseded，新标记 supersedes 并含双向链接。旧文件保留不删除。",
+    "risk": "旧知识永远 active，被推翻的结论仍被当成权威引用。",
+    "fixes_tested": ["P2-supersede"],
+    "expected": [
+      "superseded-status-in-note-schema",
+      "confidence-field-exists",
+      "supersede-action-in-write-policy",
+      "bidirectional-links-present",
+      "old-note-not-deleted"
+    ]
+  }
+]

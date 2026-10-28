@@ -1,0 +1,4 @@
+interface:
+  display_name: "Obsidian Bases"
+  short_description: "Create and edit Obsidian Bases (database views) over the vault."
+  default_prompt: "$obsidian-bases"

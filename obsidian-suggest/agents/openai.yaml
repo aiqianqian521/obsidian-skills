@@ -1,0 +1,4 @@
+interface:
+  display_name: "Obsidian Suggest"
+  short_description: "Scan auto-generated L0 indexes and propose archive/curation suggestions for the vault."
+  default_prompt: "$obsidian-suggest"

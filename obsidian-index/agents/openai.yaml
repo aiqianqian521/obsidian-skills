@@ -1,0 +1,4 @@
+interface:
+  display_name: "Obsidian Index"
+  short_description: "Initialize and maintain Zhang Gege's Obsidian vault indexes."
+  default_prompt: "使用 $obsidian-index 初始化或维护 Obsidian 知识库索引。"

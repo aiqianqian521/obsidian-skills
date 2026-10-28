@@ -1,0 +1,4 @@
+interface:
+  display_name: "Obsidian Analyst"
+  short_description: "Analyze context with role lenses before archiving."
+  default_prompt: "使用 $obsidian-analyst 从多角色视角分析当前上下文并给出归档建议。"

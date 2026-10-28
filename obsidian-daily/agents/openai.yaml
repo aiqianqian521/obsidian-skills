@@ -1,0 +1,4 @@
+interface:
+  display_name: "Obsidian Daily"
+  short_description: "Archive daily work into Zhang Gege's Obsidian daily notes."
+  default_prompt: "使用 $obsidian-daily 把今天的工作归档到 Obsidian 每日记录。"
