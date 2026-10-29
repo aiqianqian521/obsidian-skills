@@ -447,3 +447,16 @@ node scripts/run-full-fix-evals.mjs
 - 不在生产 Vault 上运行首次测试。
 - 不自动创建配置目录以外的目录——写入前扫描 vault 已有结构，发现不匹配时先确认。
 - 不静默创建目录——目标目录不存在且 vault 非空时，报告差异并等待用户确认。
+
+## 配套项目（生态互链）
+
+本仓属于一个五仓的 agent skill 生态：它是知识库层的 skill 组，产出走统一的输出结构。
+
+| 仓库 | 是什么 | 与本仓的关系 |
+|---|---|---|
+| [aiqianqian521/sloth-loop](https://github.com/aiqianqian521/sloth-loop) | 零 LLM 的任务编排引擎（身体） | 把本仓作为能力层挂载（`skills/obsidian-skills` 子模块），负责调度各知识库 skill 的执行轮次 |
+| [aiqianqian521/ooda_skill](https://github.com/aiqianqian521/ooda_skill) | OODA 执行循环纪律 | 同族 skill：本仓的采集/整理动作按其 Observe→Orient→Decide→Act 纪律推进 |
+| [aiqianqian521/architect-skills](https://github.com/aiqianqian521/architect-skills) | 19 个架构评估 skill | 同族 skill：本仓沉淀的架构决策可交给它做维度化评估 |
+| [aiqianqian521/ai-skill-output-template](https://github.com/aiqianqian521/ai-skill-output-template) | 声明式多模板注册中心 | 定义本仓各 skill 报告的输出结构契约 |
+
+> 上面四个仓库都反向链接回本仓；`sloth-loop` 以 submodule 方式挂载本仓，可按需 pin 版本。
