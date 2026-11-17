@@ -458,5 +458,6 @@ node scripts/run-full-fix-evals.mjs
 | [aiqianqian521/ooda_skill](https://github.com/aiqianqian521/ooda_skill) | OODA 执行循环纪律 | 同族 skill：本仓的采集/整理动作按其 Observe→Orient→Decide→Act 纪律推进 |
 | [aiqianqian521/architect-skills](https://github.com/aiqianqian521/architect-skills) | 19 个架构评估 skill | 同族 skill：本仓沉淀的架构决策可交给它做维度化评估 |
 | [aiqianqian521/ai-skill-output-template](https://github.com/aiqianqian521/ai-skill-output-template) | 声明式多模板注册中心 | 定义本仓各 skill 报告的输出结构契约 |
+| [aiqianqian521/go-sec-audit](https://github.com/aiqianqian521/go-sec-audit) | Go 源码安全审计 skill（L0→L3 证据门判决） | 同族专项 skill：落库的 Go 项目安全结论可按它的证据门格式复核 |
 
 > 上面四个仓库都反向链接回本仓；`sloth-loop` 以 submodule 方式挂载本仓，可按需 pin 版本。
